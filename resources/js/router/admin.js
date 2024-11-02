@@ -4,12 +4,12 @@ const routes = [
     // 首頁
     {
         path: '/',
-        name: 'home',
+        name: 'Admin Home',
         meta: {
             title: 'home',
             authRequired: true,
         },
-        component: () => import('../views/main/home.vue'),
+        component: () => import('../views/admin/Home.vue'),
     },
 ]
 
@@ -25,15 +25,16 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
         document.title = routeTo.meta.title + " | DEMO";
     }
 
-    const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
-    if (!authRequired) return next();
+    // const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
+    // if (!authRequired) return next();
+    //
+    // if (localStorage.getItem('user')) {
+    //     next();
+    // } else {
+    //     next({ name: 'login', query: { redirectFrom: routeTo.fullPath } });
+    // }
 
-    if (localStorage.getItem('user')) {
-        next();
-    } else {
-        next({ name: 'login', query: { redirectFrom: routeTo.fullPath } });
-    }
-
+    next();
 });
 
 export default router;

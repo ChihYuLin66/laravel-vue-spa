@@ -1,11 +1,11 @@
 <script setup>
   import {ref} from "vue";
 
-  const helloMain = ref('Hello Main !!!');
+  const hello = ref('Hello Admin !!!');
 </script>
 
 <template>
-    main work!  {{ helloMain }}
+    work!  {{ hello }}
 </template>
 
 <style scoped>

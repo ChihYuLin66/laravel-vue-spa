@@ -4,13 +4,32 @@ const routes = [
     // 首頁
     {
         path: '/',
-        name: 'home',
+        name: 'Main Home',
         meta: {
             title: 'home',
             authRequired: true,
         },
-        component: () => import('../views/main/home.vue'),
+        component: () => import('../views/main/Home.vue'),
     },
+
+
+    {
+        path: '/todos',
+        name: 'TodoList',
+        component: () => import('../views/main/Todos/Index.vue'),
+    },
+    {
+        path: '/todos/create',
+        name: 'TodoCreate',
+        component: () => import('../views/main/Todos/Create.vue'),
+    },
+    {
+        path: '/todos/:id/edit',
+        name: 'TodoEdit',
+        component: () => import('../views/main/Todos/Edit.vue'),
+        props: true,
+    },
+
 ]
 
 const router = createRouter({
