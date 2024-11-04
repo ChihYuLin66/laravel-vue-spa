@@ -1,66 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel-Vue SPA
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+這是一個展示如何使用 Laravel 作為後端框架以及 Vue.js 作為前端框架來構建單頁應用程式（SPA）的示例專案。此專案提供了文件夾結構和基本邏輯的範例，方便與前端進行快速協作。
 
-## About Laravel
+## 目錄
+- [專案結構](#專案結構)
+    - [資料夾總覽](#資料夾總覽)
+    - [詳細的資料夾結構](#詳細的資料夾結構)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 專案結構
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 資料夾總覽
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+以下是本專案中的主要資料夾和文件的簡要概述：
+```
+laravel-vue-spa/
+├── app/                  # Laravel 後端邏輯和模型
+├── public/               # 公共資源和 Laravel 入口文件
+├── resources/            # Laravel 視圖和前端資源
+│   └── js/               # Vue.js 應用程式檔案（別名：vue/src）
+├── routes/               # Laravel 路由定義
+└── ...
+```
+本說明文件主要介紹 `vue/src` 目錄（即 `laravel/resources/js`），其中包含 Vue.js 的主要應用程式程式碼。
 
-## Learning Laravel
+### 詳細的資料夾結構
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+以下是 `vue/src` 目錄的詳細結構，用於組織組件、視圖、樣式、資源等：
+```
+vue/src/
+|__ styles/                      # 全局樣式、樣式變數和混合樣式
+|   |__ main/                    # 專門用於前台的樣式
+|   |__ admin/                   # 專門用於後台的樣式
+|
+|__ assets/                      # 靜態資源
+|   ├── images/                  # 圖片資源
+|   └── fonts/                   # 字型資源
+|
+|__ components/                  # 可重用組件
+|   |__ commons/                 # 前後台皆可用的通用組件（如按鈕、表單等）
+|   |__ main/                    # 專門用於前台的組件
+|   |__ admin/                   # 專門用於後台的組件
+|
+|__ plugins/                     # 外部插件設定
+|   |__ i18n/index.js            # 多語系插件配置
+|   |__ axios/index.js           # Axios API 請求設置、封裝
+|
+|__ views/                       # 頁面視圖
+|   |__ main/                    # 前台
+|       |__ Home.vue             # 前台首頁
+|       |__ layouts/             # 前台佈局
+|           |__ master.vue       # 前台主佈局
+|           |__ nav.vue          # 前台導航佈局
+|       |__ auth/                # 認證相關頁面（登入、註冊）
+|           |__ partials/
+|               |__ AuthLayout.vue # 認證佈局
+|           |__ AuthSignIn.vue   # 登入頁面
+|           |__ AuthSignUp.vue   # 註冊頁面
+|       |__ [domains]/           # 前台特定功能或模組頁面
+|           |__ Index.vue        # 列表頁（例如商品列表）
+|           |__ Create.vue       # 新增頁（例如新增商品）
+|           |__ Edit.vue         # 編輯頁（例如編輯商品）
+|           |__ Show.vue         # 詳細頁（例如商品詳情）
+|
+|   |__ admin/                   # 後台
+|       |__ Dashboard.vue        # 後台儀表板
+|       |__ layouts/             # 後台佈局
+|           |__ master.vue       # 後台主佈局
+|           |__ nav.vue          # 後台導航佈局
+|       |__ auth/                # 認證相關頁面（登入、註冊）
+|           |__ partials/
+|               |__ AuthLayout.vue # 認證佈局
+|           |__ AuthSignIn.vue   # 登入頁面
+|           |__ AuthSignUp.vue   # 註冊頁面
+|       |__ [domains]/           # 後台功能模組頁面
+|           |__ Index.vue        # 列表頁（如管理商品列表）
+|           |__ Create.vue       # 新增頁（如新增商品）
+|           |__ Edit.vue         # 編輯頁（如編輯商品）
+|           |__ Show.vue         # 詳細頁（如商品詳情）
+|
+|__ router/                      # 路由設定
+|   |__ index.js                 # 路由入口文件（若有區分前後台，則省略）
+|   |__ main.js                  # 前台路由
+|   |__ admin.js                 # 後台路由
+|
+|__ services/                    # 服務層，進行 API 請求或外部服務調用
+|   |__ apis/                    # 所有 API 請求的預處理
+|       |__ [domains].js         # CRUD API，例如 product.js
+|
+|__ stores/                      # 全局狀態管理（Pinia）
+|       |__ main/                # 前台狀態模組
+|           |__ user.js          # 使用者狀態
+|       |__ admin/               # 後台狀態模組
+|
+|__ utils/                       # 工具函數，如日期格式化、計算函數等
+|
+|__ App.vue                      # 主應用組件
+|__ main-app.js                  # 前台入口檔案
+|__ admin-app.js                 # 後台入口檔案
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### 主要資料夾說明
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **styles/**：包含全局樣式設定，包括樣式變數和混合樣式以確保項目中樣式的一致性。
+    - `main/`：前台專屬樣式。
+    - `admin/`：後台專屬樣式。
 
-## Laravel Sponsors
+- **assets/**：存放靜態資源，如圖片和字型。
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **components/**：包含可重用組件，前後台分別有不同的組件。
+    - `commons/`：通用組件，例如按鈕和表單。
+    - `main/` 和 `admin/`：前台和後台專用的組件。
 
-### Premium Partners
+- **plugins/**：外部插件的設定，例如：
+    - `i18n/`：多語系配置。
+    - `axios/`：Axios API 請求設定。
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- **views/**：包含所有的主頁面視圖。
+    - `main/`：前台的頁面視圖。
+    - `admin/`：後台的頁面視圖。
+    - `[domains]/`：各模組的特定頁面，例如產品或使用者管理等。
 
-## Contributing
+- **router/**：應用程式路由設定，分為前台（`main.js`）和後台（`admin.js`）的路由文件。
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **services/**：提供 API 服務層，用於管理所有的外部請求。
+    - `apis/`：依功能模組整理 API 請求處理邏輯。
 
-## Code of Conduct
+- **stores/**：使用 Pinia 進行全局狀態管理。
+    - `main/`：前台的狀態模組。
+    - `admin/`：後台的狀態模組。
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **utils/**：工具函數，例如日期格式化、計算函數等。
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
